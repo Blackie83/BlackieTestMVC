@@ -86,6 +86,14 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -156,12 +164,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Classes\InfoQuest_All.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Administration_UnitController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Administration_Unit.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Administration_Unit.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Administration_Unit.cs">
+      <DependentUpon>Administration_Unit.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Administration_Unit.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Administration_Unit.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Administration_Unit1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Administration_Unit.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -215,10 +243,21 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min - Copy.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\PagedList.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Administration_Unit.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Administration_Unit.edmx</DependentUpon>
+      <LastGenOutput>Administration_Unit.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Administration_Unit.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Administration_Unit.edmx</DependentUpon>
+      <LastGenOutput>Administration_Unit1.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -229,6 +268,13 @@
     <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
     <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
     <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <EntityDeploy Include="Models\Administration_Unit.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Administration_Unit.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Administration_Unit.edmx.diagram">
+      <DependentUpon>Administration_Unit.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -256,10 +302,16 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
+    <Content Include="Views\Administration_Unit\Create.cshtml" />
+    <Content Include="Views\Administration_Unit\Delete.cshtml" />
+    <Content Include="Views\Administration_Unit\Details.cshtml" />
+    <Content Include="Views\Administration_Unit\Edit.cshtml" />
+    <Content Include="Views\Administration_Unit\Index.cshtml" />
+    <Content Include="Views\Shared\NoAccess.cshtml" />
+    <Content Include="Views\Shared\_Layout_NoAccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

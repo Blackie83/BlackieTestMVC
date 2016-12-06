@@ -1,0 +1,74 @@
+﻿@model BlackieTestMVC.Models.Administration_Unit
+
+@{
+  ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+  <h4>Administration_Unit</h4>
+  <hr />
+  <dl class="dl-horizontal">
+    <dt>
+      @Html.DisplayNameFor(model => model.Unit_Name)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Unit_Name)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Unit_Description)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Unit_Description)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Unit_CreatedDate)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Unit_CreatedDate)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Unit_CreatedBy)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Unit_CreatedBy)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Unit_ModifiedDate)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Unit_ModifiedDate)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Unit_ModifiedBy)
+    </dt>
+
+    <dd>
+      @Html.DisplayFor(model => model.Unit_ModifiedBy)
+    </dd>
+
+    <dt>
+      @Html.DisplayNameFor(model => model.Unit_IsActive)
+    </dt>
+
+    <dd>
+      @BlackieTestMVC.App_Classes.InfoQuest_All.All_BoolToString((bool)Model.Unit_IsActive)
+    </dd>
+
+  </dl>
+</div>
+<p>
+  @Html.ActionLink("Edit", "Edit", new { id = Model.Unit_Id }) |
+  @Html.ActionLink("Back to List", "Index")
+</p>
