@@ -37,5 +37,21 @@ namespace BlackieTestMVC.App_Classes
 
       return FullName;
     }
+
+    public static string All_UniqueName(string name)
+    {
+      string success = "Yes";
+
+      if (name != "test1")
+      {
+        success = "Yes";
+      }
+      else
+      {
+        success = "No";
+      }
+
+      return success;
+    }
   }
 }

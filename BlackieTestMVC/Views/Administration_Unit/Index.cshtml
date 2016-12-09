@@ -13,17 +13,13 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="form-horizontal">
-        <div class="col-md-2">
-          <label class="control-label">Name or Description:</label>
+        <div class="col-sm-6">
+          <label class="control-label">Name or Description:&nbsp;</label>
+          @Html.TextBox("Search_Name", null, new { @class = "form-control input-sm" })
         </div>
-        <div class="col-md-4">
-          <input type="text" id="SearchString_Name" name="SearchString_Name" class="form-control" value="@ViewBag.CurrentFilter_Name" />
-        </div>
-        <div class="col-md-2">
-          <label class="control-label">Is Active:</label>
-        </div>
-        <div class="col-md-4">
-          @Html.DropDownList("SearchString_IsActive", (IEnumerable<SelectListItem>)@ViewBag.DropDown_IsActive, new { @class = "form-control" })
+        <div class="col-sm-6">
+          <label class="control-label">Is Active:&nbsp;</label>
+          @Html.DropDownList("Search_IsActive", null, new { @class = "form-control input-sm" })
         </div>
       </div>
     </div>
@@ -34,7 +30,7 @@
   </div>
 }
 
-<div class="col-md-12" style="height:20px;"></div>
+<div class="col-sm-12" style="height:20px;"></div>
 
 <p>
   @Html.ActionLink("Create New Unit", "Create")
@@ -42,56 +38,58 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <table class="table table-striped table-hover">
-      <tr>Total Units: @Model.TotalItemCount</tr>
-      <tr>
-        <th></th>
-        <th>
-          @Html.ActionLink(@Html.DisplayNameFor(model => model.FirstOrDefault().Unit_Name).ToString(), "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter_name = ViewBag.CurrentFilter_Name, currentFilter_IsActive = ViewBag.CurrentFilter_IsActive })
-        </th>
-        <th>
-          @Html.ActionLink(@Html.DisplayNameFor(model => model.FirstOrDefault().Unit_Description).ToString(), "Index", new { sortOrder = ViewBag.DescriptionSortParm, currentFilter_name = ViewBag.CurrentFilter_Name, currentFilter_IsActive = ViewBag.CurrentFilter_IsActive })
-        </th>
-        <th>
-          @Html.ActionLink(@Html.DisplayNameFor(model => model.FirstOrDefault().Unit_CreatedDate).ToString(), "Index", new { sortOrder = ViewBag.CreatedDateSortParm, currentFilter_name = ViewBag.CurrentFilter_Name, currentFilter_IsActive = ViewBag.CurrentFilter_IsActive })
-        </th>
-        <th>
-          @Html.ActionLink(@Html.DisplayNameFor(model => model.FirstOrDefault().Unit_ModifiedDate).ToString(), "Index", new { sortOrder = ViewBag.ModifiedDateSortParm, currentFilter_name = ViewBag.CurrentFilter_Name, currentFilter_IsActive = ViewBag.CurrentFilter_IsActive })
-        </th>
-        <th>
-          @Html.ActionLink(@Html.DisplayNameFor(model => model.FirstOrDefault().Unit_IsActive).ToString(), "Index", new { sortOrder = ViewBag.IsActiveSortParm, currentFilter_name = ViewBag.CurrentFilter_Name, currentFilter_IsActive = ViewBag.CurrentFilter_IsActive })
-        </th>
-      </tr>
-      @foreach (var item in Model)
-      {
+    <div class="table-responsive">
+      <table class="table table-striped table-hover table-condensed">
+        <tr>Total Units: @Model.TotalItemCount</tr>
         <tr>
-          <td>
-            @Html.ActionLink("Details", "Details", new { id = item.Unit_Id }) |
-            @Html.ActionLink("Edit", "Edit", new { id = item.Unit_Id })
-          </td>
-          <td>
-            @Html.DisplayFor(modelItem => item.Unit_Name)
-          </td>
-          <td>
-            @Html.DisplayFor(modelItem => item.Unit_Description)
-          </td>
-          <td>
-            @Html.DisplayFor(modelItem => item.Unit_CreatedDate)
-          </td>
-          <td>
-            @Html.DisplayFor(modelItem => item.Unit_ModifiedDate)
-          </td>
-          <td>
-            @BlackieTestMVC.App_Classes.InfoQuest_All.All_BoolToString((bool)item.Unit_IsActive)
-          </td>
+          <th></th>
+          <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.FirstOrDefault().Unit_Name).ToString(), "Index", new { Search_Name = Request["Search_Name"], Search_IsActive = Request["Search_IsActive"], Order = ViewBag.NameSortParm })
+          </th>
+          <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.FirstOrDefault().Unit_Description).ToString(), "Index", new { Search_Name = Request["Search_Name"], Search_IsActive = Request["Search_IsActive"], Order = ViewBag.DescriptionSortParm })
+          </th>
+          <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.FirstOrDefault().Unit_CreatedDate).ToString(), "Index", new { Search_Name = Request["Search_Name"], Search_IsActive = Request["Search_IsActive"], Order = ViewBag.CreatedDateSortParm })
+          </th>
+          <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.FirstOrDefault().Unit_ModifiedDate).ToString(), "Index", new { Search_Name = Request["Search_Name"], Search_IsActive = Request["Search_IsActive"], Order = ViewBag.ModifiedDateSortParm })
+          </th>
+          <th>
+            @Html.ActionLink(@Html.DisplayNameFor(model => model.FirstOrDefault().Unit_IsActive).ToString(), "Index", new { Search_Name = Request["Search_Name"], Search_IsActive = Request["Search_IsActive"], Order = ViewBag.IsActiveSortParm })
+          </th>
         </tr>
+        @foreach (var item in Model)
+      {
+      <tr>
+        <td>
+          @Html.ActionLink("Details", "Details", new { id = item.Unit_Id }) |
+          @Html.ActionLink("Edit", "Edit", new { id = item.Unit_Id })
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.Unit_Name)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.Unit_Description)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.Unit_CreatedDate)
+        </td>
+        <td>
+          @Html.DisplayFor(modelItem => item.Unit_ModifiedDate)
+        </td>
+        <td>
+          @BlackieTestMVC.App_Classes.InfoQuest_All.All_BoolToString((bool)item.Unit_IsActive)
+        </td>
+      </tr>
       }
-    </table>
+      </table>
+    </div>
   </div>
   <div class="panel-footer">
     <div class="text-center">
       Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-      @Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter_name = ViewBag.CurrentFilter_Name, currentFilter_IsActive = ViewBag.CurrentFilter_IsActive }))
+      @Html.PagedListPager(Model, page => Url.Action("Index", new { Search_Name = Request["Search_Name"], Search_IsActive = Request["Search_IsActive"], Order = ViewBag.CurrentSort, page }))
     </div>
   </div>
 </div>
