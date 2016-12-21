@@ -52,30 +52,35 @@ namespace BlackieTestMVC.Models
     {
       if (value != null)
       {
-        var model = (Administration_Unit)validationContext.ObjectInstance;
-        string test = model.Unit_Id.ToString();
-
-        if (!string.IsNullOrEmpty(value.ToString()))
+        try
         {
-          if (value.ToString() == "test1")
+          var model = (Administration_Unit)validationContext.ObjectInstance;
+          string test = model.Unit_Id.ToString();
+
+
+          InfoQuestEntities db = new InfoQuestEntities();
+          var Unit = db.Administration_Unit.FirstOrDefault(u => u.Unit_Name == (string)value);
+
+          if (Unit == null)
+          {
+            return ValidationResult.Success;
+          }
+          else
           {
             return new ValidationResult("");
           }
         }
-
+        catch (Exception ex)
+        {
+          return new ValidationResult(ex.Message.ToString());
+        }
+      }
+      else
+      {
         return ValidationResult.Success;
-
-        //InfoQuestEntities db = new InfoQuestEntities();
-
-        //var Unit = db.Administration_Unit.FirstOrDefault(u => u.Unit_Name == (string)value);
-
-        //if (Unit == null)
-        //  return ValidationResult.Success;
-        //else
-        //  return new ValidationResult("Unit already exists");
       }
 
-      return base.IsValid(value, validationContext);
+      //return base.IsValid(value, validationContext);
     }
   }
 }

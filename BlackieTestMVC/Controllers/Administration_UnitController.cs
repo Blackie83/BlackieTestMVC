@@ -203,28 +203,47 @@ namespace BlackieTestMVC.Controllers
 
 
 
-    public JsonResult UniqueName(string name)
+    public JsonResult UniqueName(Administration_Unit test)
+    //public JsonResult UniqueName(string name)
     {
-      if (!string.IsNullOrEmpty(name))
+      //if (!string.IsNullOrEmpty(name))
+      //{
+      //  Administration_Unit CurrentModel = new Administration_Unit();
+      //  CurrentModel.Unit_Name = name;
+
+      //  ModelState.Clear();
+      //  TryValidateModel(CurrentModel);
+      //  bool Unique = ModelState.IsValidField("Unit_Name");
+      //  bool test2 = ModelState.IsValidField("Unit_Description");
+
+      //  if (Unique == true)
+      //  {
+      //    return Json(new { status = "Success", message = "" });
+      //  }
+      //  else
+      //  {
+      //    return Json(new { status = "Error", message = ((UniqueNameAttribute)(typeof(Administration_UnitMetaData).GetProperty("Unit_Name")).GetCustomAttributes(typeof(UniqueNameAttribute), false)[0]).ErrorMessage });
+      //  }
+      //}
+
+      try
       {
-        Administration_Unit CurrentModel = new Administration_Unit();
-        CurrentModel.Unit_Name = name;
-
-        ModelState.Clear();
-        TryValidateModel(CurrentModel);
         bool Unique = ModelState.IsValidField("Unit_Name");
-        bool test2 = ModelState.IsValidField("Unit_Description");
-
         if (Unique == true)
         {
-          return Json(new { status = "Success", message = "" });
+          return Json(new { status = "Success", message = "" }, JsonRequestBehavior.AllowGet);
         }
         else
         {
-          return Json(new { status = "Error", message = ((UniqueNameAttribute)(typeof(Administration_UnitMetaData).GetProperty("Unit_Name")).GetCustomAttributes(typeof(UniqueNameAttribute), false)[0]).ErrorMessage });
+          //return Json(new { status = "Error", message = ((UniqueNameAttribute)(typeof(Administration_UnitMetaData).GetProperty("Unit_Name")).GetCustomAttributes(typeof(UniqueNameAttribute), false)[0]).ErrorMessage }, JsonRequestBehavior.AllowGet);
+          return Json(new { status = "Error", message = ModelState["Unit_Name"].Errors[0].ErrorMessage }, JsonRequestBehavior.AllowGet);
         }
       }
-      return Json(new { status = "Success", message = "" });
+      catch (Exception ex)
+      {
+        return Json(new { status = "Error", message = ex.Message.ToString() }, JsonRequestBehavior.AllowGet);
+      }
+
     }
   }
 }

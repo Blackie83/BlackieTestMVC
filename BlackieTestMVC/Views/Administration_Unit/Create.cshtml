@@ -11,7 +11,7 @@
   @Html.AntiForgeryToken()
 
   <div class="form-horizontal">
-    <h4>Administration_Unit</h4>
+    <h4>Unit</h4>
     <hr />
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
@@ -48,26 +48,33 @@
   <script type="text/javascript">
     //$("#Unit_Name").on('change focusout blur', function () {
     $("#Unit_Name").on('blur', function () {
-      $.ajax({
-        url: "/Administration_Unit/UniqueName",
-        type: "POST",
-        data: JSON.stringify({ 'name': $("#Unit_Name").val() }),
-        dataType: "json",
-        traditional: true,
-        contentType: "application/json; charset=utf-8",
-        success: function (response) {
-          if (response.status == "Success") {
-            $("span[data-valmsg-for='Unit_Name']").html("");
-          } else if (response.status == "Error") {
-            $("span[data-valmsg-for='Unit_Name']").html(response.message);
-          } else {
-            $("span[data-valmsg-for='Unit_Name']").html("Server Side Error1");
+      //if ($("#Unit_Name").val() != '') {
+        var model = {
+          Unit_Name: $("#Unit_Name").val()//,
+          //Unit_Description: $("#Unit_Description").val()
+        };
+        $.ajax({
+          url: "/Administration_Unit/UniqueName",
+          type: "POST",
+          //data: JSON.stringify({ 'name': $("#Unit_Name").val() }),
+          data: JSON.stringify(model),
+          dataType: "json",
+          traditional: true,
+          contentType: "application/json; charset=utf-8",
+          success: function (response) {
+            if (response.status == "Success") {
+              $("span[data-valmsg-for='Unit_Name']").html("");
+            } else if (response.status == "Error") {
+              $("span[data-valmsg-for='Unit_Name']").html(response.message);
+            } else {
+              $("span[data-valmsg-for='Unit_Name']").html("Server Side Error1");
+            }
+          },
+          error: function (request) {
+            $("span[data-valmsg-for='Unit_Name']").html("Server Side Error2:" + request.message);
           }
-        },
-        error: function () {
-          $("span[data-valmsg-for='Unit_Name']").html("Server Side Error2");
-        }
-      });
+        });
+      //}
     });
   </script>
 }
