@@ -46,7 +46,7 @@ namespace BlackieTestMVC.Models
   }
 
   [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-  internal class UniqueNameAttribute : ValidationAttribute
+  internal class UniqueNameAttribute : ValidationAttribute, IClientValidatable
   {
     protected override ValidationResult IsValid(object value, ValidationContext validationContext)
     {
@@ -82,5 +82,15 @@ namespace BlackieTestMVC.Models
 
       //return base.IsValid(value, validationContext);
     }
+
+    public IEnumerable<ModelClientValidationRule> GetClientValidationRules(ModelMetadata metadata, ControllerContext context)
+    {
+        yield return new ModelClientValidationRule
+        {
+            ErrorMessage = this.ErrorMessage,
+            ValidationType = "futuredate"
+        };
+    }
+
   }
 }
